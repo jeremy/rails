@@ -7,7 +7,8 @@ module Rails
 
     def initialize
       super
-      add_filter   { |line| line.sub("#{Rails.root}/", '') }
+      rails_root_prefix = "#{Rails.root}/"
+      add_filter   { |line| line.sub(rails_root_prefix, '') }
       add_filter   { |line| line.sub(RENDER_TEMPLATE_PATTERN, '') }
       add_filter   { |line| line.sub('./', '/') } # for tests
 
