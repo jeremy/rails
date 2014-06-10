@@ -595,13 +595,13 @@ module ActiveRecord
       # take place, but that's ok since the nil case is not the common one that we wish
       # to optimise for.
       def retrieve_connection_pool(klass)
-        class_to_pool[klass.name] ||= begin
+        class_to_pool[klass.model_name.name] ||= begin
           until pool = pool_for(klass)
             klass = klass.superclass
             break unless klass <= Base
           end
 
-          class_to_pool[klass.name] = pool
+          class_to_pool[klass.model_name.name] = pool
         end
       end
 

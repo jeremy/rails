@@ -11,11 +11,11 @@ module ActiveRecord
 
     module ClassMethods
       def current_scope #:nodoc:
-        ScopeRegistry.value_for(:current_scope, base_class.to_s)
+        ScopeRegistry.value_for(:current_scope, base_class.model_name.name)
       end
 
       def current_scope=(scope) #:nodoc:
-        ScopeRegistry.set_value_for(:current_scope, base_class.to_s, scope)
+        ScopeRegistry.set_value_for(:current_scope, base_class.model_name.name, scope)
       end
     end
 

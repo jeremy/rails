@@ -58,7 +58,7 @@ module ActiveRecord
 
           if options[:source_type]
             join_attributes[source_reflection.foreign_type] =
-              records.map { |record| record.class.base_class.name }
+              records.map { |record| record.class.base_class.model_name.name }
           end
 
           if records.count == 1

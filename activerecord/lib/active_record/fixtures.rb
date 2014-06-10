@@ -791,7 +791,7 @@ module ActiveRecord
     end
 
     def class_name
-      model_class.name if model_class
+      model_class.model_name.name if model_class
     end
 
     def each
