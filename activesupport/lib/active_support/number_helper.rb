@@ -40,7 +40,7 @@ module ActiveSupport
     #
     #   number_to_phone(1235551234, country_code: 1, extension: 1343, delimiter: '.')
     #   # => +1.123.555.1234 x 1343
-    def number_to_phone(number, options = {})
+    def number_to_phone(number, options = nil)
       NumberToPhoneConverter.convert(number, options)
     end
 
@@ -82,7 +82,7 @@ module ActiveSupport
     #   # => &pound;1234567890,50
     #   number_to_currency(1234567890.50, unit: '&pound;', separator: ',', delimiter: '', format: '%n %u')
     #   # => 1234567890,50 &pound;
-    def number_to_currency(number, options = {})
+    def number_to_currency(number, options = nil)
       NumberToCurrencyConverter.convert(number, options)
     end
 
@@ -118,7 +118,7 @@ module ActiveSupport
     #   number_to_percentage(1000, locale: :fr)                    # => 1 000,000%
     #   number_to_percentage('98a')                                # => 98a%
     #   number_to_percentage(100, format: '%n  %')                 # => 100  %
-    def number_to_percentage(number, options = {})
+    def number_to_percentage(number, options = nil)
       NumberToPercentageConverter.convert(number, options)
     end
 
@@ -147,7 +147,7 @@ module ActiveSupport
     #   number_to_delimited('112a')                      # => 112a
     #   number_to_delimited(98765432.98, delimiter: ' ', separator: ',')
     #   # => 98 765 432,98
-    def number_to_delimited(number, options = {})
+    def number_to_delimited(number, options = nil)
       NumberToDelimitedConverter.convert(number, options)
     end
 
@@ -190,7 +190,7 @@ module ActiveSupport
     #   number_to_rounded(389.32314, precision: 4, significant: true) # => 389.3
     #   number_to_rounded(1111.2345, precision: 2, separator: ',', delimiter: '.')
     #   # => 1.111,23
-    def number_to_rounded(number, options = {})
+    def number_to_rounded(number, options = nil)
       NumberToRoundedConverter.convert(number, options)
     end
 
@@ -234,7 +234,7 @@ module ActiveSupport
     #   number_to_human_size(1234567, precision: 2, separator: ',')  # => 1,2 MB
     #   number_to_human_size(1234567890123, precision: 5)            # => "1.1228 TB"
     #   number_to_human_size(524288000, precision: 5)                # => "500 MB"
-    def number_to_human_size(number, options = {})
+    def number_to_human_size(number, options = nil)
       NumberToHumanSizeConverter.convert(number, options)
     end
 
@@ -338,7 +338,7 @@ module ActiveSupport
     #   number_to_human(343, units: :distance, precision: 1) # => "300 meters"
     #   number_to_human(1, units: :distance)                 # => "1 meter"
     #   number_to_human(0.34, units: :distance)              # => "34 centimeters"
-    def number_to_human(number, options = {})
+    def number_to_human(number, options = nil)
       NumberToHumanConverter.convert(number, options)
     end
   end

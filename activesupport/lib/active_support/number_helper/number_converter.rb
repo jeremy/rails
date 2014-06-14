@@ -120,7 +120,7 @@ module ActiveSupport
 
       def initialize(number, options)
         @number = number
-        @opts   = options.symbolize_keys
+        @opts   = options ? options.symbolize_keys : {}
       end
 
       def execute

@@ -601,7 +601,7 @@ module ActiveSupport
 
       # Create a new cache entry for the specified value. Options supported are
       # +:compress+, +:compress_threshold+, and +:expires_in+.
-      def initialize(value, options = {})
+      def initialize(value, options = nil)
         if should_compress?(value, options)
           @value = compress(value)
           @compressed = true
@@ -610,7 +610,7 @@ module ActiveSupport
         end
 
         @created_at = Time.now.to_f
-        @expires_in = options[:expires_in]
+        @expires_in = options && options[:expires_in]
         @expires_in = @expires_in.to_f if @expires_in
       end
 
@@ -671,7 +671,7 @@ module ActiveSupport
 
       private
         def should_compress?(value, options)
-          if value && options[:compress]
+          if value && options && options[:compress]
             compress_threshold = options[:compress_threshold] || DEFAULT_COMPRESS_LIMIT
             serialized_value_size = (value.is_a?(String) ? value : Marshal.dump(value)).bytesize
 
