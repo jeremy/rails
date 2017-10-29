@@ -71,6 +71,11 @@ db_namespace = namespace :db do
         raise "unknown schema format #{ActiveRecord::Base.schema_format}"
       end
     end
+
+    if ActiveRecord::Base.connection.schema_cache
+      db_namespace["db:schema:cache:dump"].invoke
+    end
+
     # Allow this task to be called as many times as required. An example is the
     # migrate:redo task, which calls other two internally that depend on this one.
     db_namespace["_dump"].reenable
@@ -242,6 +247,11 @@ db_namespace = namespace :db do
       File.open(filename, "w:utf-8") do |file|
         ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
       end
+
+      if ActiveRecord::Base.connection.schema_cache
+        db_namespace["db:schema:cache:dump"].invoke
+      end
+
       db_namespace["schema:dump"].reenable
     end
 
@@ -284,6 +294,11 @@ db_namespace = namespace :db do
           f.print "\n"
         end
       end
+
+      if ActiveRecord::Base.connection.schema_cache
+        db_namespace["db:schema:cache:dump"].invoke
+      end
+
       db_namespace["structure:dump"].reenable
     end
 
