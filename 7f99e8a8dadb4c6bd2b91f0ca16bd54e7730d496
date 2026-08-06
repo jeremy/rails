@@ -1,0 +1,31 @@
+activejob/lib/active_job/debouncing.rb
+  s_397e2065e2a5c3::t_e5134c8a1df8a4 1-152
+activejob/test/cases/debouncing_test.rb
+  s_397e2065e2a5c3::t_7c3c9179dc528d 1-117,122-288
+  s_397e2065e2a5c3::t_740a02bc3ff5ac 118-121
+guides/source/active_support_instrumentation.md
+  s_397e2065e2a5c3::t_70948690df5e85 499-506
+activejob/CHANGELOG.md
+  s_397e2065e2a5c3::t_1826be9dbcb420 1-25
+guides/source/active_job_basics.md
+  s_397e2065e2a5c3::t_66d2fc6f624545 556-601
+activejob/lib/active_job/base.rb
+  s_397e2065e2a5c3::t_d0c8ee6ae0cc8e 11
+  s_397e2065e2a5c3::t_bf03a7c6487067 73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.17",
+  "base_commit_sha": "7f99e8a8dadb4c6bd2b91f0ca16bd54e7730d496",
+  "prompts": {},
+  "sessions": {
+    "s_397e2065e2a5c3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "91dd0021-b9f4-456d-879a-f47af66f4465",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Jeremy Daer <jeremy@37signals.com>"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+activejob/lib/active_job/base.rb
+  s_397e2065e2a5c3::t_bf03a7c6487067 73
+  s_397e2065e2a5c3::t_d0c8ee6ae0cc8e 11
+activejob/lib/active_job/debouncing.rb
+  s_397e2065e2a5c3::t_e5134c8a1df8a4 1-2,5,7-8,12,15,19-22,28-31,34-42,50,56,62,68,70,73,77-154
+  s_397e2065e2a5c3::t_7351f29b29e8ae 3-4,6,9-11,13-14,16-18,23,43-49,51-55,57-61,63-67,69,71-72,74-76
+  s_397e2065e2a5c3::t_373b9200ee1e28 24-27,32-33
+guides/source/active_job_basics.md
+  s_397e2065e2a5c3::t_66d2fc6f624545 556-594,600-603
+  s_397e2065e2a5c3::t_ac1223005c8eb2 595-599
+activejob/CHANGELOG.md
+  s_397e2065e2a5c3::t_1826be9dbcb420 1-25
+activejob/test/cases/debouncing_test.rb
+  s_397e2065e2a5c3::t_7a43fc2ebdf2c6 250,256-262
+  s_397e2065e2a5c3::t_7c3c9179dc528d 1-117,122-249,251-255,263-295
+  s_397e2065e2a5c3::t_740a02bc3ff5ac 118-121
+guides/source/active_support_instrumentation.md
+  s_397e2065e2a5c3::t_70948690df5e85 499-506
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "1ac86f2b270d4809cc942d979a32fc1c4040a49f",
+  "prompts": {},
+  "sessions": {
+    "s_397e2065e2a5c3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "91dd0021-b9f4-456d-879a-f47af66f4465",
+        "model": "claude-fable-5"
+      },
+      "human_author": null
+    }
+  }
+}
