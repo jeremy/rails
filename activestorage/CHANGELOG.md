@@ -1,3 +1,37 @@
+*   Reject transformation methods that dispatch arbitrary libvips operations on the vips path.
+
+    CVE-2025-24293 removed `apply`, `loader`, and `saver` from
+    `ActiveStorage.supported_image_processing_methods`, but that allowlist is only enforced by the
+    `ImageMagick` transformer. On the `vips` path (the default since Rails 7.0) the allowlist is
+    never read, so those three methods were still accepted from any variation key.
+
+    They are not inert. `ImageProcessing::Vips` dispatches the loader and saver by name --
+    `Vips::Image.public_send(:"#{loader}load", ...)` and `image.public_send(:"#{saver}save", ...)` --
+    whenever the loader/saver options carry a nested `loader:`/`saver:` selector, and `apply`
+    re-enters the builder for each of its entries, reaching those same selectors regardless of any
+    per-method check. This lets a variation key choose an arbitrary libvips operation. The saver
+    case is the sharpest, because `Vips.block_untrusted(true)` does not cover it: `saver: { saver:
+    "dz" }` runs `dzsave`, expanding one request into an unbounded tile pyramid on disk, and
+    `csvsave`/`matrixsave` emit text that is then served back as an image variant.
+
+    Rather than enforce the full `supported_image_processing_methods` allowlist on the `vips` path,
+    a targeted rejection is added to the base `ImageProcessingTransformer` that both transformers
+    share: it rejects `apply` and a nested `loader:`/`saver:` selector while still accepting ordinary
+    option hashes such as `loader: { page: nil }` and `saver: { quality: 80 }` that applications
+    legitimately rely on. The full allowlist is deliberately *not* applied to `vips` -- it is a list
+    of ImageMagick option names, and enforcing it would reject legitimate vips-only operations; the
+    only unsafe methods on this path are the three the dispatch primitive needs. This is a
+    defense-in-depth complement to `Vips.block_untrusted(true)`: blocking removes which untrusted
+    *loaders* the dispatch can reach, but savers are not flagged untrusted, so only method-level
+    rejection removes the dispatch primitive itself. The ImageMagick argument scanner
+    (`unsupported_image_processing_arguments`) is deliberately left in `ImageMagick`; it guards
+    against shell-metacharacter injection into an ImageMagick command line and has no analogue on
+    the vips path.
+
+    [CVE-2025-24293]
+
+    *Jeremy Daer*
+
 *   Disable libvips's unfuzzed image loaders and savers.
 
     libvips flags some of its loaders and savers as "unfuzzed" or "untrusted", meaning they are only

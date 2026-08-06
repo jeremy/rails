@@ -317,6 +317,52 @@ class ActiveStorage::VariantTest < ActiveSupport::TestCase
     end
   end
 
+  test "vips variations reject apply, which re-enters the builder to dispatch arbitrary operations" do
+    process_variants_with :vips do
+      blob = create_file_blob(filename: "racecar.jpg")
+
+      assert_raise(ActiveStorage::Transformers::ImageProcessingTransformer::UnsupportedImageProcessingMethod) do
+        blob.variant(apply: { loader: { loader: "magick" } }).processed
+      end
+
+      assert_raise(ActiveStorage::Transformers::ImageProcessingTransformer::UnsupportedImageProcessingMethod) do
+        blob.variant(apply: { resize_to_limit: [ 100, 100 ] }).processed
+      end
+    end
+  end
+
+  test "vips variations reject a nested loader or saver selector, which dispatches an arbitrary libvips operation" do
+    process_variants_with :vips do
+      blob = create_file_blob(filename: "racecar.jpg")
+
+      # ImageProcessing::Vips::Processor.load_image does Vips::Image.public_send(:"#{loader}load", ...)
+      # only when a :loader key is nested in the loader options.
+      assert_raise(ActiveStorage::Transformers::ImageProcessingTransformer::UnsupportedImageProcessingMethod) do
+        blob.variant(loader: { loader: "magick" }).processed
+      end
+
+      # ImageProcessing::Vips::Processor.save_image does image.public_send(:"#{saver}save", ...)
+      # only when a :saver key is nested in the saver options.
+      assert_raise(ActiveStorage::Transformers::ImageProcessingTransformer::UnsupportedImageProcessingMethod) do
+        blob.variant(saver: { saver: "magick" }).processed
+      end
+    end
+  end
+
+  test "vips variations still accept loader and saver option hashes without a nested selector" do
+    blob = create_file_blob(filename: "image.gif", content_type: "image/gif")
+
+    process_variants_with :vips do
+      assert_nothing_raised do
+        blob.variant(loader: { n: -1 }, resize_to_limit: [ 100, 100 ]).processed
+      end
+
+      assert_nothing_raised do
+        blob.variant(saver: { optimize_gif_frames: true }).processed
+      end
+    end
+  end
+
   test "destroy deletes file from service" do
     blob = create_file_blob(filename: "racecar.jpg")
     variant = blob.variant(resize_to_limit: [100, 100]).processed

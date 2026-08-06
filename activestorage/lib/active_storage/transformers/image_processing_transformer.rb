@@ -36,11 +36,30 @@ module ActiveStorage
         end
 
         def validate_transformation(name, argument)
-          if name.to_s == "combine_options"
+          case name.to_s
+          when "combine_options"
             raise ArgumentError, <<~ERROR.squish
               Active Storage's ImageProcessing transformer doesn't support :combine_options,
               as it always generates a single command.
             ERROR
+          when "apply"
+            # apply re-enters the builder for each entry in its argument, so it dispatches
+            # arbitrary operations (including loader/saver) regardless of any per-method check.
+            # It is builder machinery, never a legitimate transformation in a variation URL.
+            raise UnsupportedImageProcessingMethod, <<~ERROR.squish
+              The provided transformation method is not supported: apply.
+            ERROR
+          when "loader", "saver"
+            # A loader/saver argument is normally a Hash of options for the format's default
+            # loader/saver. But a nested :loader/:saver key selects the operation by name:
+            # ImageProcessing::Vips::Processor dispatches Vips::Image.public_send(:"#{loader}load")
+            # / image.public_send(:"#{saver}save"). Reject that selector while still allowing
+            # option hashes (e.g. loader: { page: nil }, saver: { quality: 80 }).
+            if argument.is_a?(Hash) && argument.any? { |key, _| key.to_s == name.to_s }
+              raise UnsupportedImageProcessingMethod, <<~ERROR.squish
+                The provided transformation method is not supported: #{name} with a nested #{name} selector.
+              ERROR
+            end
           end
         end
     end
