@@ -1,0 +1,23 @@
+activestorage/test/models/variant_test.rb
+  s_80c15ba381cceb::t_436a1dddce68bf 320-365
+activestorage/CHANGELOG.md
+  s_80c15ba381cceb::t_8f2c8f815c3d2e 1-30
+activestorage/lib/active_storage/transformers/image_processing_transformer.rb
+  s_80c15ba381cceb::t_460ae0dcfa4e5e 39-40,45-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "7f07637ae6984536c5f0724417518b6a6758d452",
+  "prompts": {},
+  "sessions": {
+    "s_80c15ba381cceb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d5a7b695-412d-4fb4-8678-2d08a52609c1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Jeremy Daer <jeremy@37signals.com>"
+    }
+  }
+}
