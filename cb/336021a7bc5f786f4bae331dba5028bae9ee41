@@ -1,0 +1,27 @@
+activerecord/CHANGELOG.md
+  s_901fdf97b4688e::t_a97b2194c89883 1-15
+activerecord/lib/active_record/touch_later.rb
+  s_901fdf97b4688e::t_e7531c222c78ec 64-71
+activerecord/lib/active_record/transactions.rb
+  s_901fdf97b4688e::t_e7531c222c78ec 410,423
+activerecord/lib/active_record/attribute_methods/dirty.rb
+  s_901fdf97b4688e::t_e7531c222c78ec 202,227,238,245
+activerecord/test/cases/touch_later_test.rb
+  s_901fdf97b4688e::t_de3f3724fc0e72 31-72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "cb336021a7bc5f786f4bae331dba5028bae9ee41",
+  "prompts": {},
+  "sessions": {
+    "s_901fdf97b4688e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "43b5bd7e-7fc1-449d-bd4a-78f70f669416",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Jeremy Daer <jeremy@37signals.com>"
+    }
+  }
+}
