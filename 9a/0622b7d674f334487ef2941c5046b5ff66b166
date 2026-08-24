@@ -1,0 +1,23 @@
+Gemfile.lock
+  s_943849f3bd8fbb::t_4d5527df5b48cb 62,334,871
+activestorage/CHANGELOG.md
+  s_943849f3bd8fbb::t_1fbad7b8e9ce4d 1-16
+activestorage/activestorage.gemspec
+  s_943849f3bd8fbb::t_2759441ce83658 40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "9a0622b7d674f334487ef2941c5046b5ff66b166",
+  "prompts": {},
+  "sessions": {
+    "s_943849f3bd8fbb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b184420a-8fa6-42dc-b706-8db3ce19d976",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Jeremy Daer <jeremy@37signals.com>"
+    }
+  }
+}
