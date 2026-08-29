@@ -1,0 +1,32 @@
+activestorage/CHANGELOG.md
+  s_3b0db2387ac842::t_114a1523c29f45 1,3-5
+  s_943849f3bd8fbb::t_1fbad7b8e9ce4d 2,6-7
+Gemfile.lock
+  s_943849f3bd8fbb::t_4d5527df5b48cb 62,334,871
+activestorage/activestorage.gemspec
+  s_943849f3bd8fbb::t_2759441ce83658 40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "90bfaa0fbe78c5fb613bba848a63f2eba3f2298b",
+  "prompts": {},
+  "sessions": {
+    "s_3b0db2387ac842": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b382f923-e693-420e-ad07-5a0fd02cb2e9",
+        "model": "claude-fable-5"
+      },
+      "human_author": null
+    },
+    "s_943849f3bd8fbb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b184420a-8fa6-42dc-b706-8db3ce19d976",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Jeremy Daer <jeremy@37signals.com>"
+    }
+  }
+}
